@@ -1,0 +1,24 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: XXXXXX
+  region: us-east-1
+
+vpc:
+  subnets:
+    private:
+      us-east-1a: { id: subnet-XXXX }
+      us-east-1b: { id: subnet-XXXX }
+
+nodeGroups:
+  - name: nodegroup
+    desiredCapacity: 3
+    instanceType: t3.small
+    privateNetworking: true
+    iam:
+      withAddonPolicies:
+        albIngress: true
+
+secretsEncryption:
+  keyARN: arn:aws:kms:us-east-1:XXXXX:key/XXXXXX
